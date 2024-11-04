@@ -1,5 +1,17 @@
 version: 2.1
 
+# Intégration de l'orb Codecov pour simplifier le processus de publication de la couverture
+orbs:
+  codecov: codecov/codecov@4.0.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+version: 2.1
+
 orbs:
   codecov: codecov/codecov@4.0.1
 
@@ -44,3 +56,8 @@ workflows:
       - deploy-coverage:
           requires:
             - build-and-test
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test

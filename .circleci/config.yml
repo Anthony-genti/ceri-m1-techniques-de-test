@@ -30,7 +30,7 @@ jobs:
       # Publiez le rapport de couverture sur Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml
-          token: $CODECOV_TOKEN
+          token: CODECOV_TOKEN
 
 workflows:
   sample:

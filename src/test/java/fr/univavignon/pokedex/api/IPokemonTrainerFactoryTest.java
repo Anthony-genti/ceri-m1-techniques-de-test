@@ -17,12 +17,15 @@ public class IPokemonTrainerFactoryTest {
     @Test
     public void testCreateTrainer() {
         // Configure mock behavior
+        IPokedexFactory pokedexFactory = Mockito.mock(IPokedexFactory.class);
         IPokedex pokedex = Mockito.mock(IPokedex.class);
-        PokemonTrainer trainer = new PokemonTrainer("Ash",Team.VALOR, pokedex);
-        Mockito.when(factory.createTrainer("Ash", Team.VALOR, Mockito.mock(IPokedexFactory.class))).thenReturn(trainer);
+        Mockito.when(pokedexFactory.createPokedex(Mockito.any(), Mockito.any())).thenReturn(pokedex);
+
+        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.VALOR, pokedex);
+        Mockito.when(factory.createTrainer("Ash", Team.VALOR, pokedexFactory)).thenReturn(trainer);
 
         // Test the method
-        PokemonTrainer createdTrainer = factory.createTrainer("Ash", Team.VALOR, Mockito.mock(IPokedexFactory.class));
+        PokemonTrainer createdTrainer = factory.createTrainer("Ash", Team.VALOR, pokedexFactory);
         assertNotNull(createdTrainer);
         assertEquals("Ash", createdTrainer.getName());
     }

@@ -1,9 +1,19 @@
 # UCE Génie Logiciel Avancé : Techniques de tests
 
+## Author
+**Name:** Anthony Genti  
+**Group:** Your Group Name
+
+## Build Status
+[![CircleCI](https://circleci.com/gh/Anthony-genti/ceri-m1-techniques-de-test.svg?style=svg)](https://circleci.com/gh/Anthony-genti/ceri-m1-techniques-de-test)
+
+## Test Coverage
+[![codecov](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test)
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  
-Pour cela nous allons réaliser un projet logiciel de petite taille, en suivant la roadmap suivante : 
+Pour cela nous allons réaliser un projet logiciel de petite taille, en suivant la roadmap suivante :
 - Setup du projet
 - Mise en place des outils d’intégration continue
 - Écriture des tests unitaires
@@ -33,5 +43,25 @@ Le rendu des TPs se fait au rythme suivant :
 
 Pour chaque rendu vous devez créer un tag à partir du commit qui correspond à la complétion du TP.  
 Si vous ne spécifiez pas de tag, le dernier commit à la date-heure de la fin de séance sera celui considéré.
+
+## Documentation
+### Technical Choices
+- **Language:** Java
+- **Build Tool:** Maven
+- **Testing Frameworks:** JUnit, Mockito
+- **CI/CD:** CircleCI
+- **Code Coverage:** JaCoCo, Codecov
+
+### Project Description
+Provide a brief description of your project here.
+
+### How to Build and Test
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run `mvn clean package` to build the project.
+4. Run `mvn test` to execute the tests.
+
+### Additional Information
+Add any additional information or documentation about your project here.
 
 [^1]: Si vous n’êtes vraiment pas à l’aise avec cet outil nous vous conseillons quand même vivement de vous y mettre.

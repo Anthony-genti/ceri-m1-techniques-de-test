@@ -54,6 +54,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>

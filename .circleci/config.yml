@@ -30,6 +30,11 @@ jobs:
     steps:
       - checkout
 
+      - run:
+          name: List Coverage Files
+          command: ls -R target/site/jacoco
+
+
       # Publiez le rapport de couverture vers Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml

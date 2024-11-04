@@ -1,6 +1,5 @@
 version: 2.1
 
-# Intégration de l'orb Codecov pour simplifier le processus de publication de la couverture
 orbs:
   codecov: codecov/codecov@4.0.1
 
@@ -12,22 +11,26 @@ jobs:
     steps:
       - checkout
 
-      # Étape de compilation du projet
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
 
-      # Exécution des tests pour générer la couverture
       - run:
           name: Test with JaCoCo
           command: mvn test
 
-      # Générez le rapport de couverture avec JaCoCo
       - run:
           name: Generate Coverage Report
           command: mvn jacoco:report
 
-      # Publiez le rapport de couverture sur Codecov
+  deploy-coverage:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+      - checkout
+
+      # Publiez le rapport de couverture vers Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
@@ -36,3 +39,6 @@ workflows:
   sample:
     jobs:
       - build-and-test
+      - deploy-coverage:
+          requires:
+            - build-and-test

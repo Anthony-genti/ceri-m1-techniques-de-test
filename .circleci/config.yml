@@ -10,52 +10,27 @@ jobs:
       - image: cimg/openjdk:11.0
 
     steps:
-version: 2.1
-
-orbs:
-  codecov: codecov/codecov@4.0.1
-
-executors:
-  docker-executor:
-    docker:
-      - image: cimg/openjdk:11.0
-
-jobs:
-  build-and-test:
-    executor: docker-executor
-    steps:
       - checkout
 
+      # Étape de compilation du projet
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
 
-      # Exécution des tests et génération du rapport de couverture
+      # Exécution des tests pour générer la couverture
       - run:
-          name: Test and Generate Coverage Report
-          command: mvn verify
+          name: Test with JaCoCo
+          command: mvn test
 
-  deploy-coverage:
-    executor: docker-executor
-    steps:
-      - checkout
-
+      # Générez le rapport de couverture avec JaCoCo
       - run:
-          name: Check Coverage Files
-          command: ls -R target/site/jacoco || echo "Coverage files not found"
+          name: Generate Coverage Report
+          command: mvn jacoco:report
 
-      # Publication du rapport de couverture vers Codecov
+      # Publiez le rapport de couverture sur Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
-
-workflows:
-  sample:
-    jobs:
-      - build-and-test
-      - deploy-coverage:
-          requires:
-            - build-and-test
 
 workflows:
   sample:

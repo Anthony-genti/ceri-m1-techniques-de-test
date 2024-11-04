@@ -29,4 +29,33 @@ public class IPokemonFactoryTest {
         assertNotNull(pokemon2);
         assertEquals("Aquali", pokemon2.getName());
     }
+
+    @Test
+    public void testPokemonConstructorAndGetters() {
+        // Create a Pokemon instance
+        int index = 1;
+        String name = "Bulbasaur";
+        int attack = 49;
+        int defense = 49;
+        int stamina = 45;
+        int cp = 300;
+        int hp = 60;
+        int dust = 4000;
+        int candy = 3;
+        double iv = 56.0;
+
+        Pokemon pokemon = new Pokemon(index, name, attack, defense, stamina, cp, hp, dust, candy, iv);
+
+        // Test the getters
+        assertEquals(index, pokemon.getIndex());
+        assertEquals(name, pokemon.getName());
+        assertEquals(attack, pokemon.getAttack());
+        assertEquals(defense, pokemon.getDefense());
+        assertEquals(stamina, pokemon.getStamina());
+        assertEquals(cp, pokemon.getCp());
+        assertEquals(hp, pokemon.getHp());
+        assertEquals(dust, pokemon.getDust());
+        assertEquals(candy, pokemon.getCandy());
+        assertEquals(iv, pokemon.getIv(), 0.01);
+    }
 }

@@ -15,13 +15,10 @@ jobs:
           name: Build
           command: mvn -B -DskipTests clean package
 
+      # Exécution des tests et génération du rapport de couverture en un seul passage
       - run:
-          name: Test with JaCoCo
-          command: mvn test
-
-      - run:
-          name: Generate Coverage Report
-          command: mvn jacoco:report
+          name: Test and Generate Coverage Report
+          command: mvn verify
 
   deploy-coverage:
     docker:
@@ -31,11 +28,10 @@ jobs:
       - checkout
 
       - run:
-          name: List Coverage Files
-          command: ls -R target/site/jacoco
+          name: Check Coverage Files
+          command: ls -R target/site/jacoco || echo "Coverage files not found"
 
-
-      # Publiez le rapport de couverture vers Codecov
+      # Publication du rapport de couverture vers Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN

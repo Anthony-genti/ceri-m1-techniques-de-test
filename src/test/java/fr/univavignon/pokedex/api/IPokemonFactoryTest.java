@@ -58,4 +58,19 @@ public class IPokemonFactoryTest {
         assertEquals(candy, pokemon.getCandy());
         assertEquals(iv, pokemon.getIv(), 0.01);
     }
+
+    @Test
+    public void testPokemonTrainerConstructorAndGetters() {
+        // Create a PokemonTrainer instance
+        String trainerName = "Ash";
+        Team team = Team.VALOR;
+        IPokedex trainerPokedex = Mockito.mock(IPokedex.class);
+
+        PokemonTrainer trainer = new PokemonTrainer(trainerName, team, trainerPokedex);
+
+        // Test the getters
+        assertEquals(trainerName, trainer.getName());
+        assertEquals(team, trainer.getTeam());
+        assertEquals(trainerPokedex, trainer.getPokedex());
+    }
 }

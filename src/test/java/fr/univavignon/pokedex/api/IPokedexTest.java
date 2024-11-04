@@ -24,4 +24,13 @@ public class IPokedexTest {
         int index = pokedex.addPokemon(pokemon);
         assertEquals(0, index);
     }
+
+    @Test
+    public void testPokedexException() {
+        String errorMessage = "This is a test error message";
+        PokedexException exception = new PokedexException(errorMessage);
+
+        assertNotNull(exception);
+        assertEquals(errorMessage, exception.getMessage());
+    }
 }

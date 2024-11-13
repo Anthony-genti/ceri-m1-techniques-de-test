@@ -24,4 +24,11 @@ public class IPokemonMetadataProviderTest {
         assertNotNull(metadata2);
         assertEquals("Aquali", metadata2.getName());
     }
+
+    @Test
+    public void testGetPokemonMetadataInvalidIndex() {
+        // Use an invalid index for the test case
+        int invalidIndex = -1; // Assuming -1 is an invalid index
+        assertThrows(PokedexException.class, () -> provider.getPokemonMetadata(invalidIndex));
+    }
 }

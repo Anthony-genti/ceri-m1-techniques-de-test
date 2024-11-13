@@ -30,4 +30,14 @@ public class IPokemonFactoryTest {
         assertNotNull(pokemon2);
         assertEquals("Aquali", pokemon2.getName());
     }
+
+    @Test
+    public void testCreatePokemonException() throws PokedexException {
+        // Mock the metadataProvider to throw a PokedexException
+        Mockito.when(metadataProvider.getPokemonMetadata(Mockito.anyInt())).thenThrow(new PokedexException("Test exception"));
+
+        // Attempt to create a Pokemon and expect a null result due to the exception
+        Pokemon pokemon = factory.createPokemon(0, 613, 64, 4000, 4);
+        assertNull(pokemon);
+    }
 }

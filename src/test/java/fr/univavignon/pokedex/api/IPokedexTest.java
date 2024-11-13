@@ -46,6 +46,11 @@ public class IPokedexTest {
     }
 
     @Test
+    public void testGetPokemonNegativeIndex() {
+        assertThrows(PokedexException.class, () -> pokedex.getPokemon(-1));
+    }
+
+    @Test
     public void testGetPokemons() {
         pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
         List<Pokemon> pokemons = pokedex.getPokemons();
@@ -99,8 +104,8 @@ public class IPokedexTest {
 
     @Test
     public void testPokemonComparators() {
-        Pokemon pokemon1 = new Pokemon(1, "Bulbasaur", 49, 49, 45, 300, 60, 4000, 3, 56.0);
-        Pokemon pokemon2 = new Pokemon(2, "Ivysaur", 62, 63, 60, 400, 80, 5000, 5, 70.0);
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 300, 613, 4000, 4, 56.0);
+        Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0);
 
         assertTrue(PokemonComparators.NAME.compare(pokemon1, pokemon2) < 0);
         assertTrue(PokemonComparators.NAME.compare(pokemon2, pokemon1) > 0);
@@ -113,5 +118,14 @@ public class IPokedexTest {
         assertTrue(PokemonComparators.CP.compare(pokemon1, pokemon2) < 0);
         assertTrue(PokemonComparators.CP.compare(pokemon2, pokemon1) > 0);
         assertEquals(0, PokemonComparators.CP.compare(pokemon1, pokemon1));
+    }
+
+    @Test
+    public void testPokemonGetters() {
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 300, 613, 4000, 4, 56.0);
+        assertEquals(90, pokemon.getHp());
+        assertEquals(4000, pokemon.getDust());
+        assertEquals(4, pokemon.getCandy());
+        assertEquals(56.0, pokemon.getIv());
     }
 }

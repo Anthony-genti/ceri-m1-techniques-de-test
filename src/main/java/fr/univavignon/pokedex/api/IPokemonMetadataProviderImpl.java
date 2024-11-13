@@ -13,8 +13,8 @@ public class IPokemonMetadataProviderImpl implements IPokemonMetadataProvider {
 
     static {
         // Example data, you should replace this with actual Pokémon data
-        POKEMON_METADATA.put(1, new PokemonMetadata(0, "Bulbizarre", 126, 126, 90));
-        POKEMON_METADATA.put(4, new PokemonMetadata(133, "Aquali", 186, 168, 260));
+        POKEMON_METADATA.put(0, new PokemonMetadata(0, "Bulbizarre", 126, 126, 90));
+        POKEMON_METADATA.put(133, new PokemonMetadata(133, "Aquali", 186, 168, 260));
         // Add more Pokémon metadata as needed
     }
 

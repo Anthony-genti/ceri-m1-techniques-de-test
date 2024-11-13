@@ -11,22 +11,17 @@ public class IPokemonTrainerFactoryTest {
 
     @BeforeEach
     public void setUp() {
-        factory = Mockito.mock(IPokemonTrainerFactory.class);
+        factory = new IPokemonTrainerFactoryImpl();
     }
 
     @Test
     public void testCreateTrainer() {
-        // Configure mock behavior
-        IPokedexFactory pokedexFactory = Mockito.mock(IPokedexFactory.class);
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Mockito.when(pokedexFactory.createPokedex(Mockito.any(), Mockito.any())).thenReturn(pokedex);
-
-        PokemonTrainer trainer = new PokemonTrainer("Ash", Team.VALOR, pokedex);
-        Mockito.when(factory.createTrainer("Ash", Team.VALOR, pokedexFactory)).thenReturn(trainer);
-
-        // Test the method
-        PokemonTrainer createdTrainer = factory.createTrainer("Ash", Team.VALOR, pokedexFactory);
-        assertNotNull(createdTrainer);
-        assertEquals("Ash", createdTrainer.getName());
+        IPokedexFactory pokedexFactory = new IPokedexFactoryImpl();
+        PokemonTrainer trainer = factory.createTrainer("Ash", Team.VALOR, pokedexFactory);
+        assertNotNull(trainer);
+        assertEquals("Ash", trainer.getName());
+        assertEquals(Team.VALOR, trainer.getTeam());
+        assertNotNull(trainer.getPokedex());
+        assertTrue(trainer.getPokedex() instanceof IPokedexImpl);
     }
 }

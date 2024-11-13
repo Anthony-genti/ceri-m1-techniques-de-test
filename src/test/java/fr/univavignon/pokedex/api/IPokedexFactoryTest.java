@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class IPokedexFactoryTest {
     private IPokedexFactory factory;
+    private IPokemonMetadataProvider metadataProvider;
+    private IPokemonFactory pokemonFactory;
 
     @BeforeEach
     public void setUp() {
-        factory = Mockito.mock(IPokedexFactory.class);
+        factory = new IPokedexFactoryImpl();
+        metadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        pokemonFactory = Mockito.mock(IPokemonFactory.class);
     }
 
     @Test
     public void testCreatePokedex() {
-        // Configure mock behavior
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Mockito.when(factory.createPokedex(Mockito.any(), Mockito.any())).thenReturn(pokedex);
-
-        // Test the method
-        IPokedex createdPokedex = factory.createPokedex(Mockito.mock(IPokemonMetadataProvider.class), Mockito.mock(IPokemonFactory.class));
-        assertNotNull(createdPokedex);
+        IPokedex pokedex = factory.createPokedex(metadataProvider, pokemonFactory);
+        assertNotNull(pokedex);
+        assertTrue(pokedex instanceof IPokedexImpl);
     }
 }

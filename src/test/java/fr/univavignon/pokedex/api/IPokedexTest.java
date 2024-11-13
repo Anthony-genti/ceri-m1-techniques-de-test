@@ -22,19 +22,19 @@ public class IPokedexTest {
     @Test
     public void testSize() {
         assertEquals(0, pokedex.size());
-        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
+        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
         assertEquals(1, pokedex.size());
     }
 
     @Test
     public void testAddPokemon() {
-        int index = pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
+        int index = pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
         assertEquals(0, index);
     }
 
     @Test
     public void testGetPokemon() throws PokedexException {
-        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
+        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
         Pokemon pokemon = pokedex.getPokemon(0);
         assertNotNull(pokemon);
         assertEquals("Bulbizarre", pokemon.getName());
@@ -52,15 +52,15 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemons() {
-        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
+        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
         List<Pokemon> pokemons = pokedex.getPokemons();
         assertEquals(1, pokemons.size());
     }
 
     @Test
     public void testGetPokemonsWithOrder() {
-        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 613, 64, 4000, 4, 126, 126, 90, 56));
-        pokedex.addPokemon(new Pokemon(133, "Aquali", 2729, 202, 5000, 4, 186, 168, 260, 100));
+        pokedex.addPokemon(new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0));
+        pokedex.addPokemon(new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0));
         List<Pokemon> pokemons = pokedex.getPokemons(Comparator.comparing(Pokemon::getName));
         assertEquals("Aquali", pokemons.get(0).getName());
         assertEquals("Bulbizarre", pokemons.get(1).getName());
@@ -104,26 +104,29 @@ public class IPokedexTest {
 
     @Test
     public void testPokemonComparators() {
-        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 300, 613, 4000, 4, 56.0);
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
         Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100.0);
 
-        assertTrue(PokemonComparators.NAME.compare(pokemon1, pokemon2) < 0);
-        assertTrue(PokemonComparators.NAME.compare(pokemon2, pokemon1) > 0);
-        assertEquals(0, PokemonComparators.NAME.compare(pokemon1, pokemon1));
+        // Test NAME comparator
+        assertTrue(PokemonComparators.NAME.compare(pokemon2, pokemon1) < 0, "Expected Aquali to be less than Bulbizarre by name");
+        assertTrue(PokemonComparators.NAME.compare(pokemon1, pokemon2) > 0, "Expected Bulbizarre to be greater than Aquali by name");
+        assertEquals(0, PokemonComparators.NAME.compare(pokemon1, pokemon1), "Expected same Pokemon names to be equal");
 
-        assertTrue(PokemonComparators.INDEX.compare(pokemon1, pokemon2) < 0);
-        assertTrue(PokemonComparators.INDEX.compare(pokemon2, pokemon1) > 0);
-        assertEquals(0, PokemonComparators.INDEX.compare(pokemon1, pokemon1));
+        // Test INDEX comparator
+        assertTrue(PokemonComparators.INDEX.compare(pokemon1, pokemon2) < 0, "Expected index 0 to be less than index 133");
+        assertTrue(PokemonComparators.INDEX.compare(pokemon2, pokemon1) > 0, "Expected index 133 to be greater than index 0");
+        assertEquals(0, PokemonComparators.INDEX.compare(pokemon1, pokemon1), "Expected same Pokemon indices to be equal");
 
-        assertTrue(PokemonComparators.CP.compare(pokemon1, pokemon2) < 0);
-        assertTrue(PokemonComparators.CP.compare(pokemon2, pokemon1) > 0);
-        assertEquals(0, PokemonComparators.CP.compare(pokemon1, pokemon1));
+        // Test CP comparator
+        assertTrue(PokemonComparators.CP.compare(pokemon1, pokemon2) < 0, "Expected CP 613 to be less than CP 2729");
+        assertTrue(PokemonComparators.CP.compare(pokemon2, pokemon1) > 0, "Expected CP 2729 to be greater than CP 613");
+        assertEquals(0, PokemonComparators.CP.compare(pokemon1, pokemon1), "Expected same Pokemon CPs to be equal");
     }
 
     @Test
     public void testPokemonGetters() {
-        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 300, 613, 4000, 4, 56.0);
-        assertEquals(90, pokemon.getHp());
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56.0);
+        assertEquals(64, pokemon.getHp());
         assertEquals(4000, pokemon.getDust());
         assertEquals(4, pokemon.getCandy());
         assertEquals(56.0, pokemon.getIv());

@@ -2,7 +2,7 @@
 
 ## Author
 **Name:** Anthony Genti  
-**Group:** Your Group Name
+**Group:** CLA 1
 
 ## Build Status
 [![CircleCI](https://circleci.com/gh/Anthony-genti/ceri-m1-techniques-de-test.svg?style=svg)](https://circleci.com/gh/Anthony-genti/ceri-m1-techniques-de-test)

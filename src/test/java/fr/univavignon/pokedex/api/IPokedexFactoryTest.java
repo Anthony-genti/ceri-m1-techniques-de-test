@@ -24,4 +24,13 @@ public class IPokedexFactoryTest {
         assertNotNull(pokedex);
         assertTrue(pokedex instanceof IPokedexImpl);
     }
+
+    @Test
+    public void testCreatePokedexWithRealImplementations() {
+        IPokemonMetadataProvider realMetadataProvider = new IPokemonMetadataProviderImpl();
+        IPokemonFactory realPokemonFactory = new IPokemonFactoryImpl(realMetadataProvider);
+        IPokedex pokedex = factory.createPokedex(realMetadataProvider, realPokemonFactory);
+        assertNotNull(pokedex);
+        assertTrue(pokedex instanceof IPokedexImpl);
+    }
 }

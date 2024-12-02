@@ -4,10 +4,10 @@
         "https://checkstyle.sourceforge.io/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
+    <module name="LineLength">
+        <property name="max" value="120"/>
+    </module>
     <module name="TreeWalker">
-        <module name="LineLength">
-            <property name="max" value="120"/>
-        </module>
         <!-- Other checks can go here -->
     </module>
 </module>

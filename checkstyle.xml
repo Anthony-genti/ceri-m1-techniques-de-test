@@ -6,7 +6,7 @@
 <module name="Checker">
     <module name="TreeWalker">
         <module name="LineLength">
-            <property name="maximum" value="120"/>
+            <property name="max" value="120"/>
         </module>
         <!-- Other checks can go here -->
     </module>

@@ -10,6 +10,9 @@
 ## Test Coverage
 [![codecov](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test)
 
+![Checkstyle](https://img.shields.io/badge/code%20style-checkstyle-brightgreen)
+
+
 ## Introduction
 
 Vous allez à travers ces projet mettre en application une partie des aspects évoqués en cours vis à vis des techniques de tests.  

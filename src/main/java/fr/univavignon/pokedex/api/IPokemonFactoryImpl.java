@@ -11,7 +11,8 @@ public class IPokemonFactoryImpl implements IPokemonFactory {
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
         try {
             PokemonMetadata metadata = metadataProvider.getPokemonMetadata(index);
-            return new Pokemon(index, metadata.getName(), metadata.getAttack(), metadata.getDefense(), metadata.getStamina(), cp, hp, dust, candy, calculateIv(metadata));
+            return new Pokemon(index, metadata.getName(), metadata.getAttack(), metadata.getDefense(),
+                    metadata.getStamina(), cp, hp, dust, candy, calculateIv(metadata));
         } catch (PokedexException e) {
             e.printStackTrace();
             return null;

@@ -27,6 +27,11 @@ jobs:
           name: Generate Coverage Report
           command: mvn jacoco:report
 
+        # Exécutez Checkstyle pour vérifier le style du code
+      - run:
+          name: Run Checkstyle
+          command: mvn checkstyle:checkstyle
+
       # Publiez le rapport de couverture sur Codecov
       - codecov/upload:
           file: target/site/jacoco/jacoco.xml

@@ -6,9 +6,8 @@
 <module name="Checker">
     <module name="TreeWalker">
         <module name="LineLength">
-            <property name="max" value="100"/>
-            <property name="ignorePattern" value="^.*\\s*\\(.*\\)$"/>
+            <property name="maximum" value="120"/>
         </module>
-        <!-- Other modules can be listed here -->
+        <!-- Other checks can go here -->
     </module>
 </module>

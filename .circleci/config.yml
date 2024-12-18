@@ -37,6 +37,12 @@ jobs:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
 
+      # Persist workspace for later jobs
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/site/apidocs
+
   javadoc:
     docker:
       - image: cimg/openjdk:11.0

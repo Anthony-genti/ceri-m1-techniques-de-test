@@ -12,7 +12,7 @@
 
 ## Badge javadoc
 
-[![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://<username>.github.io/Anthony-genti/apidocs/)
+[![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://<Anthony-genti>.github.io/ceri-m1-techniques-de-test/apidocs/)
 
 
 ## Introduction

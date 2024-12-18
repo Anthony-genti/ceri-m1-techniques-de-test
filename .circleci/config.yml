@@ -27,7 +27,7 @@ jobs:
           name: Generate Coverage Report
           command: mvn jacoco:report
 
-        # Exécutez Checkstyle pour vérifier le style du code
+      # Exécutez Checkstyle pour vérifier le style du code
       - run:
           name: Run Checkstyle
           command: mvn checkstyle:check
@@ -37,7 +37,47 @@ jobs:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
 
+  javadoc:
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      - checkout
+      - run:
+          name: Generate Javadoc
+          command: mvn javadoc:javadoc
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/site/apidocs
+
+  deploy:
+    docker:
+      - image: node:12
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /workspace
+      - run:
+          name: Install gh-pages
+          command: npm install -g gh-pages
+      - run:
+          name: Deploy Javadoc to gh-pages
+          command: |
+            git config --global user.email "ci-build@example.com"
+            git config --global user.name "ci-build"
+            touch /workspace/target/site/apidocs/.nojekyll
+            gh-pages --dotfiles --message "[skip ci] Updates" --dist /workspace/target/site/apidocs
+
 workflows:
   sample:
     jobs:
       - build-and-test
+      - javadoc:
+          requires:
+            - build-and-test
+      - deploy:
+          requires:
+            - javadoc
+          filters:
+            branches:
+              only: master

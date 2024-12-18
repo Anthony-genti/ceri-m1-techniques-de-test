@@ -8,6 +8,6 @@
         <property name="max" value="120"/>
     </module>
     <module name="TreeWalker">
-        <!-- Other checks can go here -->
+        <!-- autres-->
     </module>
 </module>

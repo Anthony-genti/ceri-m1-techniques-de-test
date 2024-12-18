@@ -10,7 +10,8 @@
 ## Test Coverage
 [![codecov](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test)
 
-![Checkstyle](https://img.shields.io/badge/code%20style-checkstyle-brightgreen)
+## Badge checkstyle
+
 
 
 ## Introduction

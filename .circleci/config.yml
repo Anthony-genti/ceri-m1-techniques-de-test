@@ -48,6 +48,12 @@ jobs:
       - run:
           name: Create Site Directory
           command: mkdir -p target/site/apidocs
+      - run:
+          name: List Target Directory
+          command: ls -la target
+      - run:
+          name: List Javadoc Directory
+          command: ls -la target/site
       - persist_to_workspace:
           root: .
           paths:
@@ -55,7 +61,7 @@ jobs:
 
   deploy:
     docker:
-      - image: node:12
+      - image: cimg/node:14.14
     steps:
       - checkout
       - attach_workspace:

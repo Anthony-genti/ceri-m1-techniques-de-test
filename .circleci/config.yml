@@ -64,6 +64,13 @@ jobs:
           name: Install gh-pages
           command: npm install -g gh-pages
       - run:
+          name: Verify Javadoc Directory
+          command: |
+            if [ ! -d "/workspace/target/site/apidocs" ]; then
+              echo "Javadoc directory does not exist"
+              exit 1
+            fi
+      - run:
           name: Deploy Javadoc to gh-pages
           command: |
             git config --global user.email "ci-build@example.com"

@@ -47,7 +47,7 @@ jobs:
           command: mvn javadoc:javadoc
       - run:
           name: Create Site Directory
-          command: mkdir -p target/site
+          command: mkdir -p target/site/apidocs
       - run:
           name: List Target Directory
           command: ls -la target

@@ -10,8 +10,9 @@
 ## Test Coverage
 [![codecov](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test/branch/master/graph/badge.svg)](https://codecov.io/gh/Anthony-genti/ceri-m1-techniques-de-test)
 
-## Badge checkstyle
+## Badge javadoc
 
+[![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://<username>.github.io/Anthony-genti/apidocs/)
 
 
 ## Introduction

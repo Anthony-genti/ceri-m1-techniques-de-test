@@ -37,6 +37,12 @@ jobs:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
 
+      # Persist workspace for later jobs
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/site/apidocs
+
   javadoc:
     docker:
       - image: cimg/openjdk:11.0
@@ -48,6 +54,12 @@ jobs:
       - run:
           name: Create Site Directory
           command: mkdir -p target/site/apidocs
+      - run:
+          name: List Target Directory
+          command: ls -la target
+      - run:
+          name: List Javadoc Directory
+          command: ls -la target/site
       - persist_to_workspace:
           root: .
           paths:
@@ -55,7 +67,7 @@ jobs:
 
   deploy:
     docker:
-      - image: node:14.17.0
+      - image: cimg/node:14.17.0
     steps:
       - checkout
       - attach_workspace:
@@ -68,8 +80,13 @@ jobs:
           command: |
             git config --global user.email "ci-build@example.com"
             git config --global user.name "ci-build"
-            touch /workspace/target/site/apidocs/.nojekyll
-            gh-pages --dotfiles --message "[skip ci] Updates" --dist /workspace/target/site/apidocs
+            if [ -d "/workspace/target/site/apidocs" ]; then
+              touch /workspace/target/site/apidocs/.nojekyll
+              gh-pages --dotfiles --message "[skip ci] Updates" --dist /workspace/target/site/apidocs
+            else
+              echo "Javadoc directory does not exist"
+              exit 1
+            fi
 
 workflows:
   sample:

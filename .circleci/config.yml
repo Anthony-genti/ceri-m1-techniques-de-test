@@ -76,7 +76,7 @@ jobs:
             git config --global user.email "ci-build@example.com"
             git config --global user.name "ci-build"
             touch /workspace/target/site/apidocs/.nojekyll
-            gh-pages --dotfiles --message "[skip ci] Updates" --dist "C:/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs"
+            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/target/site/apidocs"
 
 workflows:
   sample:

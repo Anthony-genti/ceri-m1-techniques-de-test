@@ -1,0 +1,47 @@
+@options
+@packages
+-classpath
+'/home/anthony/.m2/repository/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar'
+-encoding
+'UTF-8'
+-protected
+-sourcepath
+'/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'java-project 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'java-project 1.0-SNAPSHOT API'
+fr.univavignon.pokedex.api
+/home/anthony/.m2/repository/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar = 1734550583923
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/src/main/java = 1727764729947
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/allclasses-index.html = 1734550602910
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/allpackages-index.html = 1734550602915
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/copy.svg = 1734550602985
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/element-list = 1734550602395
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/help-doc.html = 1734550602965
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/index-all.html = 1734550602952
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/index.html = 1734550602959
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/jquery-ui.overrides.css = 1734550603031
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/member-search-index.js = 1734550602930
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/module-search-index.js = 1734550602917
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/overview-tree.html = 1734550602894
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/package-search-index.js = 1734550602920
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/script.js = 1734550602979
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/search-page.js = 1734550602996
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/search.html = 1734550602956
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/search.js = 1734550602991
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/serialized-form.html = 1734550602506
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/stylesheet.css = 1734550602970
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/tag-search-index.js = 1734550602935
+/mnt/c/Users/antho/Desktop/usb/M1/technique de test/ceri-m1-techniques-de-test/target/site/apidocs/type-search-index.js = 1734550602924

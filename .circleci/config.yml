@@ -37,12 +37,6 @@ jobs:
           file: target/site/jacoco/jacoco.xml
           token: CODECOV_TOKEN
 
-      # Persist workspace for later jobs
-      - persist_to_workspace:
-          root: .
-          paths:
-            - target/site/apidocs
-
   javadoc:
     docker:
       - image: cimg/openjdk:11.0
@@ -54,12 +48,6 @@ jobs:
       - run:
           name: Create Site Directory
           command: mkdir -p target/site/apidocs
-      - run:
-          name: List Target Directory
-          command: ls -la target
-      - run:
-          name: List Javadoc Directory
-          command: ls -la target/site
       - persist_to_workspace:
           root: .
           paths:
@@ -67,7 +55,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cimg/node:14.14
+      - image: node:14.17.0
     steps:
       - checkout
       - attach_workspace:

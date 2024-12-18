@@ -46,6 +46,9 @@ jobs:
           name: Generate Javadoc
           command: mvn javadoc:javadoc
       - run:
+          name: Create Site Directory
+          command: mkdir -p target/site
+      - run:
           name: List Target Directory
           command: ls -la target
       - run:

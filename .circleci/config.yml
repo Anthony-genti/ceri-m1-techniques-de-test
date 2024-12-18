@@ -46,6 +46,9 @@ jobs:
           name: Generate Javadoc
           command: mvn javadoc:javadoc
       - run:
+          name: List Target Directory
+          command: ls -la target
+      - run:
           name: List Javadoc Directory
           command: ls -la target/site
       - persist_to_workspace:

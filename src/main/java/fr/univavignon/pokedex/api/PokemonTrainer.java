@@ -28,18 +28,30 @@ public class PokemonTrainer {
 		this.team = team;
 		this.pokedex = pokedex;
 	}
-	
-	/** Name getter. **/
+
+	/**
+	 * Returns the IV (Individual Value) of the Pokemon.
+	 *
+	 * @return IV of the Pokemon.
+	 */
 	public String getName() {
 		return name;
 	}
 
-	/** Team getter. **/
+	/**
+	 * Returns the team of the trainer.
+	 *
+	 * @return Team of the trainer.
+	 */
 	public Team getTeam() {
 		return team;
 	}
-	
-	/** Pokedex getter. **/
+
+	/**
+	 * Returns the Pokedex of the trainer.
+	 *
+	 * @return Pokedex of the trainer.
+	 */
 	public IPokedex getPokedex() {
 		return pokedex;
 	}

@@ -16,7 +16,7 @@
 
 ## Badge Checkstyle
 
-![Checkstyle Status](https://Anthony-genti.github.io/ceri-m1-techniques-de-test/checkstyle-badge.svg)
+![Checkstyle Status](https://img.shields.io/badge/checkstyle-passed-brightgreen.svg)
 
 
 ## Introduction

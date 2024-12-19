@@ -1,26 +1,114 @@
-deploy:
-  docker:
-    - image: node:16.3.0
-  steps:
-    - checkout
-    - attach_workspace:
-        at: /workspace
-    - run:
-        name: Install gh-pages
-        command: npm install -g gh-pages
-    - run:
-        name: Verify Javadoc Directory
-        command: |
-          if [ ! -d "/workspace/ceri-m1-techniques-de-test/target/site/apidocs" ]; then
-            echo "Javadoc directory does not exist"
-            exit 1
-    - run:
-        name: Configure Git
-        command: |
-          git config --global user.email "anthony.genti@alumni.univ-avignon.fr"
-          git config --global user.name "Anthony-genti"
-    - run:
-        name: Deploy Javadoc to gh-pages
-        command: |
-          touch /workspace/ceri-m1-techniques-de-test/target/site/apidocs/.nojekyll
-          gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/ceri-m1-techniques-de-test/target/site/apidocs"
+version: 2.1
+
+# Intégration de l'orb Codecov pour simplifier le processus de publication de la couverture
+orbs:
+  codecov: codecov/codecov@4.0.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/openjdk:11.0
+
+    steps:
+      - checkout
+
+      # Étape de compilation du projet
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+
+      # Exécution des tests pour générer la couverture
+      - run:
+          name: Test with JaCoCo
+          command: mvn test
+
+      # Générez le rapport de couverture avec JaCoCo
+      - run:
+          name: Generate Coverage Report
+          command: mvn jacoco:report
+
+
+      # Publiez le rapport de couverture sur Codecov
+      - codecov/upload:
+          file: target/site/jacoco/jacoco.xml
+          token: CODECOV_TOKEN
+
+      - run:
+          name: Run Checkstyle
+          command: |
+            mvn checkstyle:checkstyle
+            if grep -q "<error " target/checkstyle-result.xml; then
+              echo "Checkstyle Failed" > checkstyle-status.txt
+            else
+              echo "Checkstyle Passed" > checkstyle-status.txt
+            fi
+
+      - run:
+          name: Generate Checkstyle Badge
+          command: |
+            CHECKSTYLE_STATUS=$(cat checkstyle-status.txt)
+            if [ "$CHECKSTYLE_STATUS" = "Checkstyle Passed" ]; then
+              curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-passed-brightgreen.svg
+            else
+              curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-failed-red.svg
+            fi
+
+  javadoc:
+    docker:
+      - image: cimg/openjdk:11.0
+    steps:
+      - checkout
+      - run:
+          name: Generate Javadoc
+          command: mvn javadoc:javadoc
+      - run:
+          name: Create Site Directory
+          command: mkdir -p target/site/apidocs
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/site/apidocs
+
+  deploy:
+    docker:
+      - image: node:16.3.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /workspace
+      - run:
+          name: Install gh-pages
+          command: npm install -g gh-pages
+      - run:
+          name: Verify Javadoc Directory
+          command: |
+            if [ ! -d "/workspace/target/site/apidocs" ]; then
+              echo "Javadoc directory does not exist"
+              exit 1
+            fi
+      - run:
+          name: Configure Git
+          command: |
+            git config --global user.email "ci-build@example.com"
+            git config --global user.name "ci-build"
+      - run:
+          name: Deploy Javadoc to gh-pages
+          command: |
+            git config --global user.email "anthony.genti@alumni.univ-avignon.fr"
+            git config --global user.name "Anthony-genti"
+            touch /workspace/ceri-m1-techniques-de-test/target/site/apidocs/.nojekyll
+            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/ceri-m1-techniques-de-test/target/site/apidocs"
+
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+      - javadoc:
+          requires:
+            - build-and-test
+      - deploy:
+          requires:
+            - javadoc
+          filters:
+            branches:
+              only: master

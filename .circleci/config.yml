@@ -95,7 +95,7 @@ jobs:
           name: Deploy Javadoc to gh-pages
           command: |
             git config --global user.email "anthony.genti@alumni.univ-avignon.fr"
-            git config --global user.name "anthony-genti"
+            git config --global user.name "Anthony-genti"
             touch /workspace/target/site/apidocs/.nojekyll
             gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/target/site/apidocs"
 

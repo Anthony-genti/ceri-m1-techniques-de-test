@@ -14,6 +14,10 @@
 
 [![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://Anthony-genti.github.io/Anthony-genti/ceri-m1-techniques-de-test/apidocs/)
 
+## Badge Checkstyle
+
+![Checkstyle Status](https://rossmamoun.github.io/ceri-m1-techniques-de-test/checkstyle-badge.svg)
+
 
 ## Introduction
 

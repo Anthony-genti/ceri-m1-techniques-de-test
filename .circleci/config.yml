@@ -100,12 +100,10 @@ workflows:
   sample:
     jobs:
       - build-and-test
-      - javadoc:
+      - deploy-javadoc:
           requires:
-            - build-and-test
-      - deploy:
-          requires:
-            - javadoc
+            - build
           filters:
             branches:
               only: master
+              ignore: gh-pages

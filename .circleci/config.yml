@@ -80,8 +80,8 @@ jobs:
           command: |
             git config --global user.email "ci-build@example.com"
             git config --global user.name "ci-build"
-            touch /workspace/target/site/apidocs/.nojekyll
-            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/target/site/apidocs"
+            touch /workspace/ceri-m1-techniques-de-test/target/site/apidocs/.nojekyll
+            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/ceri-m1-techniques-de-test/target/site/apidocs"
 
 workflows:
   sample:

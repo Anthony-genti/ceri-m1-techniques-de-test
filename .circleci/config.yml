@@ -53,7 +53,7 @@ jobs:
               curl -o checkstyle-badge.svg https://img.shields.io/badge/checkstyle-failed-red.svg
             fi
 
-  javadoc:
+  deploy-javadoc:
     docker:
       - image: cimg/openjdk:11.0
     steps:
@@ -62,42 +62,39 @@ jobs:
           name: Generate Javadoc
           command: mvn javadoc:javadoc
       - run:
-          name: Create Site Directory
-          command: mkdir -p target/site/apidocs
-      - persist_to_workspace:
-          root: .
-          paths:
-            - target/site/apidocs
+          name: Copy Javadoc to a Temporary Directory
+          command: |
+            mkdir -p javadoc-build
+            cp -r target/site/apidocs/* javadoc-build/
 
-  deploy:
-    docker:
-      - image: node:16.3.0
-    steps:
-      - checkout
-      - attach_workspace:
-          at: /workspace
       - run:
-          name: Install gh-pages
-          command: npm install -g gh-pages
-      - run:
-          name: Verify Javadoc Directory
-          command: |
-            if [ ! -d "/workspace/target/site/apidocs" ]; then
-              echo "Javadoc directory does not exist"
-              exit 1
-            fi
-      - run:
-          name: Configure Git
-          command: |
-            git config --global user.email "ci-build@example.com"
-            git config --global user.name "ci-build"
-      - run:
-          name: Deploy Javadoc to gh-pages
+          name: Deploy to GitHub Pages
           command: |
             git config --global user.email "anthony.genti@alumni.univ-avignon.fr"
             git config --global user.name "Anthony-genti"
-            touch /workspace/ceri-m1-techniques-de-test/target/site/apidocs/.nojekyll
-            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/ceri-m1-techniques-de-test/target/site/apidocs"
+            
+            git clone https://github.com/Anthony-genti/ceri-m1-techniques-de-test.git temp-repo
+            cd temp-repo
+            
+            if ! git ls-remote --exit-code origin gh-pages; then
+              git checkout --orphan gh-pages
+              rm -rf *
+              echo "Initial gh-pages branch" > index.html
+              git add index.html
+              git commit -m "Create gh-pages branch"
+              git push origin gh-pages
+            fi
+            cd ..
+              if [ -d "gh-pages" ]; then
+                rm -rf gh-pages
+              fi
+              git clone --branch gh-pages https://github.com/Anthony-genti/ceri-m1-techniques-de-test.git gh-pages
+              cd gh-pages
+              rm -rf *
+              cp -r ../javadoc-build/* .
+              git add .
+              git commit -m "Update Javadoc"
+              git push origin gh-pages
 
 workflows:
   sample:

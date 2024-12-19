@@ -102,7 +102,7 @@ workflows:
       - build-and-test
       - deploy-javadoc:
           requires:
-            - build
+            - build-and-test
           filters:
             branches:
               only: master

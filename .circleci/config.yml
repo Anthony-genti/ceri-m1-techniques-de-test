@@ -46,24 +46,27 @@ jobs:
           name: Generate Javadoc
           command: mvn javadoc:javadoc
       - run:
-          name: Copy Javadoc to Temp Directory
-          command: cp -r target/site/apidocs ./javadoc-temp
+          name: Create Site Directory
+          command: mkdir -p target/site/apidocs
       - persist_to_workspace:
           root: .
           paths:
-            - javadoc-temp
+            - target/site/apidocs
 
   deploy:
     docker:
-      - image: cimg/base:stable
+      - image: node:16.3.0
     steps:
       - checkout
       - attach_workspace:
           at: /workspace
       - run:
+          name: Install gh-pages
+          command: npm install -g gh-pages
+      - run:
           name: Verify Javadoc Directory
           command: |
-            if [ ! -d "/workspace/javadoc-temp" ]; then
+            if [ ! -d "/workspace/target/site/apidocs" ]; then
               echo "Javadoc directory does not exist"
               exit 1
             fi
@@ -75,16 +78,10 @@ jobs:
       - run:
           name: Deploy Javadoc to gh-pages
           command: |
-            mkdir gh-pages-temp
-            cp -r /workspace/javadoc-temp/* gh-pages-temp/
-            cd gh-pages-temp
-            git init
-            git checkout --orphan gh-pages
-            touch .nojekyll
-            git add .
-            git commit -m "[skip ci] Deploy Javadoc to gh-pages"
-            git remote add origin https://github.com/Anthony-genti/ceri-m1-techniques-de-test.git
-            git push -f origin gh-pages
+            git config --global user.email "ci-build@example.com"
+            git config --global user.name "ci-build"
+            touch /workspace/target/site/apidocs/.nojekyll
+            gh-pages --dotfiles --message "[skip ci] Updates" --dist "/workspace/target/site/apidocs"
 
 workflows:
   sample:

@@ -12,7 +12,7 @@
 
 ## Badge javadoc
 
-[![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://Anthony-genti.github.io/Anthony-genti/ceri-m1-techniques-de-test/apidocs/)
+[![Javadoc](https://img.shields.io/badge/docs-javadoc-blue.svg)](https://anthony-genti.github.io/ceri-m1-techniques-de-test/fr/univavignon/pokedex/api/package-summary.html)
 
 ## Badge Checkstyle
 
